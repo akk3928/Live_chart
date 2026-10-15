@@ -1,4 +1,3 @@
-
 import pg from 'pg';
 import 'dotenv/config';
 
@@ -26,22 +25,18 @@ export async function initDb() {
 
     CREATE TABLE IF NOT EXISTS tasks (
       id SERIAL PRIMARY KEY,
-      user_id INTEGER NOT NULL REFERENCES users(id)
-        ON DELETE CASCADE,
+      user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
       title VARCHAR(200) NOT NULL,
       description TEXT NOT NULL DEFAULT '',
-      status TEXT NOT NULL DEFAULT 'todo'
-        CHECK (status IN ('todo', 'in_progress', 'done')),
-      priority TEXT NOT NULL DEFAULT 'medium'
-        CHECK (priority IN ('low', 'medium', 'high')),
+      status TEXT NOT NULL DEFAULT 'todo' CHECK (status IN ('todo', 'in_progress', 'done')),
+      priority TEXT NOT NULL DEFAULT 'medium' CHECK (priority IN ('low', 'medium', 'high')),
       due_date TEXT,
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL,
       completed_at TEXT
     );
 
-    CREATE INDEX IF NOT EXISTS idx_tasks_user
-      ON tasks(user_id);
+    CREATE INDEX IF NOT EXISTS idx_tasks_user ON tasks(user_id);
   `);
 }
 
