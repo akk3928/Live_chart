@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import './db.js';
+import { initDb } from './db.js';
 import authRoutes from './routes/auth.js';
 import taskRoutes from './routes/tasks.js';
 
