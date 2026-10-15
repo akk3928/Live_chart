@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import { initDb } from './db.js';
+import './db.js';
 import authRoutes from './routes/auth.js';
 import taskRoutes from './routes/tasks.js';
 
@@ -38,9 +38,4 @@ app.use((err, req, res, next) => {
 });
 
 const port = Number(process.env.PORT) || 4000;
-
-await initDb();
-
-app.listen(port, '0.0.0.0', () => {
-  console.log(`TaskFlow API listening on ${port}`);
-});
+app.listen(port, () => console.log(`TaskFlow API running at http://localhost:${port}`));
