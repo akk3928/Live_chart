@@ -38,4 +38,9 @@ app.use((err, req, res, next) => {
 });
 
 const port = Number(process.env.PORT) || 4000;
-app.listen(port, () => console.log(`TaskFlow API running at http://localhost:${port}`));
+
+await initDb();
+
+app.listen(port, '0.0.0.0', () => {
+  console.log(`TaskFlow API listening on ${port}`);
+});
